@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10152b">
+<title>NOVA | Error Center</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #10152b;
+  --card: #1a2240;
+  --white: #f7f8ff;
+  --muted: #a8b1ce;
+  --blue: #7895ff;
+  --purple: #a78bfa;
+  --cyan: #55e0db;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 15% 20%, #263a6b 0%, transparent 35%),
+    radial-gradient(circle at 90% 85%, #35235d 0%, transparent 35%),
+    var(--bg);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+header {
+  width: 100%;
+  padding: 28px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.logo span {
+  color: var(--cyan);
+}
+
+nav {
+  display: flex;
+  gap: 28px;
+}
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  transition: .3s;
+}
+
+nav a:hover {
+  color: var(--cyan);
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 45px 20px 70px;
+}
+
+.error-container {
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+  animation: appear .7s ease;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.badge {
+  display: inline-block;
+  border: 1px solid #7895ff66;
+  background: #7895ff15;
+  color: var(--cyan);
+  padding: 9px 17px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 25px;
+}
+
+.error-code {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(100px, 22vw, 205px);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -12px;
+  background: linear-gradient(135deg, #ffffff, #7895ff 55%, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 18px;
+  text-shadow: 0 15px 60px #7895ff22;
+}
+
+h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(27px, 5vw, 42px);
+  margin-bottom: 15px;
+}
+
+.description {
+  max-width: 550px;
+  margin: 0 auto;
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.illustration {
+  height: 115px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  position: relative;
+}
+
+.planet {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7895ff, #a78bfa);
+  box-shadow: 0 0 60px #7895ff66;
+  position: relative;
+  animation: float 4s ease-in-out infinite;
+}
+
+.planet::after {
+  content: '';
+  position: absolute;
+  width: 125px;
+  height: 30px;
+  border: 5px solid var(--cyan);
+  border-radius: 50%;
+  top: 27px;
+  left: -22px;
+  transform: rotate(-25deg);
+}
+
+.planet::before {
+  content: '✦';
+  color: white;
+  position: absolute;
+  font-size: 28px;
+  top: 20px;
+  left: 30px;
+}
+
+.stars {
+  position: absolute;
+  color: var(--cyan);
+  font-size: 23px;
+  animation: twinkle 2s infinite alternate;
+}
+
+.star1 { left: 34%; top: 10px; }
+.star2 { right: 34%; bottom: 5px; }
+.star3 { right: 28%; top: 10px; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes twinkle {
+  from { opacity: .3; transform: scale(.8); }
+  to { opacity: 1; transform: scale(1.2); }
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+button {
+  padding: 14px 25px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .3s;
+  border: none;
+}
+
+.primary {
+  background: linear-gradient(135deg, #7895ff, #9279ef);
+  color: white;
+  box-shadow: 0 8px 25px #7895ff33;
+}
+
+.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px #7895ff66;
+}
+
+.secondary {
+  background: #ffffff0d;
+  border: 1px solid #ffffff30;
+  color: white;
+}
+
+.secondary:hover {
+  background: #ffffff20;
+  transform: translateY(-3px);
+}
+
+.help-card {
+  max-width: 590px;
+  margin: 45px auto 0;
+  padding: 22px;
+  background: #ffffff09;
+  border: 1px solid #ffffff15;
+  border-radius: 15px;
+}
+
+.help-card h3 {
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+.help-card p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.status-note {
+  margin-top: 18px;
+  color: var(--cyan);
+  font-size: 12px;
+}
+
+.error-page {
+  display: none;
+}
+
+.error-page.active {
+  display: block;
+  animation: appear .5s ease;
+}
+
+.switcher {
+  margin-top: 35px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.switcher button {
+  background: transparent;
+  color: var(--cyan);
+  padding: 5px;
+  text-decoration: underline;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #8490b2;
+  font-size: 12px;
+  border-top: 1px solid #ffffff10;
+}
+
+footer span {
+  color: var(--cyan);
+}
+
+@media(max-width: 600px) {
+  header {
+    padding: 22px 6%;
+  }
+
+  .logo { font-size: 21px; }
+
+  nav { gap: 12px; }
+
+  nav a { font-size: 11px; }
+
+  main { padding: 35px 20px 50px; }
+
+  .error-code {
+    letter-spacing: -6px;
+  }
+
+  .description { font-size: 14px; }
+
+  .actions {
+    flex-direction: column;
+    padding: 0 12px;
+  }
+
+  .actions button { width: 100%; }
+
+  .help-card { margin-top: 30px; }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">NO<span>VA</span>.</div>
+  <nav aria-label="Main navigation">
+    <a href="/" onclick="goHome(event)">Home</a>
+    <a href="#errors" onclick="showError(404); return false;">404</a>
+    <a href="#errors" onclick="showError(503); return false;">503</a>
+  </nav>
+</header>
+
+<main>
+<div class="error-container">
+
+  <!-- 404 ERROR -->
+  <section id="error404" class="error-page active"
+    aria-labelledby="title404" aria-live="polite">
+
+    <div class="badge">✦ EXPLORATION INTERRUPTED</div>
+
+    <div class="error-code">404</div>
+
+    <div class="illustration" aria-hidden="true">
+      <span class="stars star1">✧</span>
+      <span class="stars star2">✦</span>
+      <span class="stars star3">✧</span>
+      <div class="planet"></div>
+    </div>
+
+    <h1 id="title404">Oops! Lost in Space?</h1>
+
+    <p class="description">
+      Looks like this page has drifted into another galaxy.
+      The page you're looking for doesn't exist or may have
+      been moved somewhere else.
+    </p>
+
+    <div class="actions">
+      <button class="primary" onclick="goHome()">
+        ← Back to Homepage
+      </button>
+
+      <button class="secondary" onclick="goBack()">
+        Go Back
+      </button>
+    </div>
+
+    <div class="help-card">
+      <h3>🚀 Don't worry, explorer!</h3>
+      <p>
+        Check the URL for spelling mistakes, return to the
+        homepage, or use the navigation menu to find your way.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- 503 ERROR -->
+  <section id="error503" class="error-page"
+    aria-labelledby="title503" aria-live="polite">
+
+    <div class="badge">⚙ TEMPORARY SYSTEM INTERRUPTION</div>
+
+    <div class="error-code">503</div>
+
+    <div class="illustration" aria-hidden="true">
+      <span class="stars star1">✧</span>
+      <span class="stars star2">✦</span>
+      <span class="stars star3">✧</span>
+      <div class="planet" style="background:linear-gradient(135deg,#55e0db,#7895ff)">
+      </div>
+    </div>
+
+    <h1 id="title503">We'll Be Right Back!</h1>
+
+    <p class="description">
+      Our universe is taking a little break. The server is
+      temporarily unavailable, possibly due to maintenance
+      or heavy traffic. We're working to restore everything.
+    </p>
+
+    <div class="actions">
+      <button class="primary" onclick="refreshPage()">
+        ↻ Try Again
+      </button>
+
+      <button class="secondary" onclick="goHome()">
+        ← Homepage
+      </button>
+    </div>
+
+    <div class="help-card">
+      <h3>🛠 What's happening?</h3>
+      <p>
+        Our team is working behind the scenes. Please wait
+        a moment and refresh the page. If the problem continues,
+        check back later for updates.
+      </p>
+      <div class="status-note">
+        ● Temporary service interruption
+      </div>
+    </div>
+
+  </section>
+
+  <div class="switcher" id="errors">
+    Preview error states:
+    <button onclick="showError(404)">404 Not Found</button>
+    |
+    <button onclick="showError(503)">503 Unavailable</button>
+  </div>
+
+</div>
+</main>
+
+<footer>
+  © 2026 <span>NOVA</span> Digital Experience.
+  Designed with care.
+</footer>
+
+<script>
+function showError(code) {
+  const page404 = document.getElementById('error404');
+  const page503 = document.getElementById('error503');
+
+  page404.classList.remove('active');
+  page503.classList.remove('active');
+
+  if (code === 503) {
+    page503.classList.add('active');
+    document.title = '503 - Service Unavailable | NOVA';
+  } else {
+    page404.classList.add('active');
+    document.title = '404 - Page Not Found | NOVA';
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goHome(event) {
+  if (event) event.preventDefault();
+  window.location.href = '/';
+}
+
+function goBack() {
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    goHome();
+  }
+}
+
+function refreshPage() {
+  window.location.reload();
+}
+
+// Allow direct preview through URL parameters:
+// ?error=404 or ?error=503
+
+const params = new URLSearchParams(window.location.search);
+const error = params.get('error');
+
+if (error === '503') {
+  showError(503);
+} else {
+  showError(404);
+}
+</script>
+
+</body>
+</html>
